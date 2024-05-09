@@ -8,6 +8,8 @@ import { ContactModule } from './contact/contact.module';
   imports: [
     SequelizeModule.forRoot({
       dialect: 'sqlite',
+      autoLoadModels: true,
+      synchronize: true,
     }),
     ContactModule,
   ],
