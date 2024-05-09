@@ -7,28 +7,28 @@ import { Contact } from './entities/contact.entity';
 @Injectable()
 export class ContactService {
   constructor(
-    @InjectModel(Contact) private readonly userModel: typeof Contact,
+    @InjectModel(Contact) private readonly contactModel: typeof Contact,
   ) {}
   async create(createContactDto: CreateContactDto) {
-    return await this.userModel.create({ ...createContactDto });
+    return await this.contactModel.create({ ...createContactDto });
   }
 
   async findAll() {
-    return await this.userModel.findAll({ where: { deleted: false } });
+    return await this.contactModel.findAll({ where: { deleted: false } });
   }
 
   async findOne(id: string) {
-    return await this.userModel.findByPk(id);
+    return await this.contactModel.findByPk(id);
   }
 
   async update(id: string, updateContactDto: UpdateContactDto) {
-    const result = await this.userModel.update(
+    const result = await this.contactModel.update(
       { ...updateContactDto },
       { where: { id }, returning: true },
     );
     const contact = result?.[1]?.[0];
     if (contact) return contact;
-    return this.userModel.findByPk(id);
+    return this.contactModel.findByPk(id);
   }
 
   remove(id: string) {
