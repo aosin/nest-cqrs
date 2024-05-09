@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { CreateContactDto } from '../src/contact/dto/create-contact.dto';
-import { Contact } from '../src/contact/entities/contact.entity';
+import { CreateContactDto } from '../src/crud/contact/dto/create-contact.dto';
+import { Contact } from '../src/crud/contact/entities/contact.entity';
 
-describe('ContactController (e2e)', () => {
+describe('CqrsContactController (e2e)', () => {
   let app: INestApplication;
 
   const uuidPattern =

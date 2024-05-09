@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { ContactModule } from './contact/contact.module';
+import { ContactModule } from './crud/contact/contact.module';
+import { CqrsContactModule as CqrsContactModule } from './cqrs/contact/cqrs-contact.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ContactModule } from './contact/contact.module';
       synchronize: true,
     }),
     ContactModule,
+    CqrsContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],
