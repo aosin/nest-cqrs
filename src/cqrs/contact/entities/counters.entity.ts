@@ -1,4 +1,10 @@
-import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  Column,
+  Default,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
 @Table({ tableName: 'counters' })
@@ -7,6 +13,11 @@ export class Counters extends Model<
   InferCreationAttributes<Counters>
 > {
   @PrimaryKey
-  @Column({ defaultValue: 0 })
+  @Default(0)
+  @Column
+  id: number;
+
+  @Default(0)
+  @Column
   numberOfContacts: number;
 }

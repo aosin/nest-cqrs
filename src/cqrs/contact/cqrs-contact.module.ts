@@ -9,6 +9,7 @@ import { GetCountersHandler } from './queries/get-counters.handler';
 import { Counters } from './entities/counters.entity';
 import { UpdateCountersHandler } from './commands/update-counters.handler';
 import { ContactAddedHandler } from './events/contact-added.handler';
+import { ContactSagas } from './sagas/contact.sagas';
 
 const commandHandlers = [AddContactHandler, UpdateCountersHandler];
 const queryHandlers = [GetAllContactsHandler, GetCountersHandler];
@@ -21,6 +22,11 @@ const eventHandlers = [ContactAddedHandler];
     SequelizeModule.forFeature([Counters], 'read'),
   ],
   controllers: [CqrsContactController],
-  providers: [...commandHandlers, ...queryHandlers, ...eventHandlers],
+  providers: [
+    ...commandHandlers,
+    ...queryHandlers,
+    ...eventHandlers,
+    ContactSagas,
+  ],
 })
 export class CqrsContactModule {}

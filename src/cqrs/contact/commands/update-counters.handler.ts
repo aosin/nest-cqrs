@@ -14,7 +14,9 @@ export class UpdateCountersHandler
     private readonly countersModel: typeof Counters,
   ) {}
   async execute(command: UpdateCountersCommand) {
-    const [counters] = await this.countersModel.findOrCreate({});
+    const [counters] = await this.countersModel.findOrCreate({
+      where: { id: 0 },
+    });
     if (command.changes.contacts) {
       counters.numberOfContacts = await this.contactModel.count();
     }
