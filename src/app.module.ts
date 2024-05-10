@@ -12,6 +12,12 @@ import { CqrsContactModule as CqrsContactModule } from './cqrs/contact/cqrs-cont
       autoLoadModels: true,
       synchronize: true,
     }),
+    SequelizeModule.forRoot({
+      dialect: 'sqlite',
+      autoLoadModels: true,
+      synchronize: true,
+      name: 'read',
+    }),
     ContactModule,
     CqrsContactModule,
   ],
