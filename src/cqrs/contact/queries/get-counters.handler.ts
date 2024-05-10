@@ -12,7 +12,7 @@ export class GetCountersHandler implements IQueryHandler<GetCountersQuery> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async execute(query: GetCountersQuery) {
-    const [counters] = await this.countersModel.findAll();
-    return counters || new Counters();
+    const counters = await this.countersModel.findAll();
+    return counters || [];
   }
 }

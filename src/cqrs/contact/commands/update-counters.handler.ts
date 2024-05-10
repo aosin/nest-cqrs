@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectModel } from '@nestjs/sequelize';
 import { CqrsContact } from '../entities/cqrs-contact.entity';
 import { UpdateCountersCommand } from './update-counters.command';
-import { Counters } from '../entities/counters.entity';
+import { Counters, CounterType } from '../entities/counters.entity';
 
 @CommandHandler(UpdateCountersCommand)
 export class UpdateCountersHandler
@@ -14,12 +14,11 @@ export class UpdateCountersHandler
     private readonly countersModel: typeof Counters,
   ) {}
   async execute(command: UpdateCountersCommand) {
-    const [counters] = await this.countersModel.findOrCreate({
-      where: { id: 0 },
-    });
     if (command.changes.contacts) {
-      counters.numberOfContacts = await this.contactModel.count();
+      this.countersModel.upsert({
+        key: CounterType.numberOfContacts,
+        value: await this.contactModel.count(),
+      });
     }
-    await counters.save();
   }
 }

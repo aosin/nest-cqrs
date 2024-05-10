@@ -53,7 +53,7 @@ export class CqrsContactController {
   })
   @Get('/counters')
   async getCounters() {
-    return CountersDto.fromEntity(
+    return CountersDto.fromCollection(
       await this.queryBus.execute(new GetCountersQuery()),
     );
   }

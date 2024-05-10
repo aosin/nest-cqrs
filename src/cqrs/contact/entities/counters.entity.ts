@@ -1,5 +1,6 @@
 import {
   Column,
+  DataType,
   Default,
   Model,
   PrimaryKey,
@@ -7,17 +8,20 @@ import {
 } from 'sequelize-typescript';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
+export enum CounterType {
+  numberOfContacts = 'numberOfContacts',
+}
+
 @Table({ tableName: 'counters' })
 export class Counters extends Model<
   InferAttributes<Counters>,
   InferCreationAttributes<Counters>
 > {
   @PrimaryKey
-  @Default(0)
-  @Column
-  id: number;
+  @Column(DataType.STRING)
+  key: CounterType;
 
   @Default(0)
   @Column
-  numberOfContacts: number;
+  value: number;
 }
